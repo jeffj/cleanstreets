@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 import os
 localDir = os.path.dirname(__file__)
 absDir = os.path.join(os.getcwd(), localDir)
@@ -53,7 +55,7 @@ class FileDemo(object):
 
 
 
-tutconf = os.path.join(os.path.dirname(__file__), 'tutorial.conf')
+tutconf = os.path.join(os.path.dirname(__file__), 'CatchServer.conf')
 
 if __name__ == '__main__':
     # CherryPy always starts with app.root when trying to map request URIs

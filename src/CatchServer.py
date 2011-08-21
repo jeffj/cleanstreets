@@ -5,6 +5,13 @@ localDir = os.path.dirname(__file__)
 absDir = os.path.join(os.getcwd(), localDir)
 
 import cherrypy
+import json
+
+from pymongo import Connection
+connection = Connection()
+
+db = connection.cleanstreets
+picdb = db.pic
 
 class FileDemo(object):
 
@@ -31,11 +38,27 @@ class FileDemo(object):
 
         print myFile
 
+         ##we still need to parse location
+        loc=[50,50]
+        ##define a placekeeper name
+        placekeeper='placekeeper'
+        ##place in the DB object and the the DB ID back
+        someIDobect=picdb.insert({"filename" : placekeeper, "loc" : loc})
+        ##Define the filename as the object ID
+        filename=str(someIDobect)
+        filenameDB=filename+".jpg"
+        ##Update the filename as the DB object
+        picdb.update( { "_id":someIDobect}, { "$set" : { "filename" :  filenameDB}} );
+        cherrypy.response.headers['Content-Type'] = 'text/javascript'
+
+
+
+
         try:
             os.mkdir ("Images")
         except Exception: 
             pass
-        f = open("Images/%s" % "test_file", "w")
+        f = open("Images/%s" % filename, "w")
 
         # Although this just counts the file length, it demonstrates
         # how to read large files in chunks instead of all at once.

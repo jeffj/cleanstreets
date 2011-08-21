@@ -59,7 +59,7 @@ class FileDemo(object):
             os.mkdir ("Images")
         except Exception: 
             pass
-        f = open("Images/%s" % filename, "w")
+        f = open("Images/%s" % filenameDB, "w")
 
         # Although this just counts the file length, it demonstrates
         # how to read large files in chunks instead of all at once.
